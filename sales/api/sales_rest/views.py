@@ -56,7 +56,6 @@ def api_salespersons(request):
             )
 
 
-
 @require_http_methods(["DELETE"])
 def api_salesperson(request, pk):
     try:
@@ -122,12 +121,12 @@ def api_sales(request):
     else:
         try:
             content = json.loads(request.body)
-            vin = content["automobile"]
-            auto = AutomobileVO.objects.get(pk=vin)
-            content["automobile"] = auto
+            automobile_id = content["automobile_id"]
+            automobile = AutomobileVO.objects.get(pk=automobile_id)
+            content["automobile"] = automobile
 
-            employee_id = content["employee_id"]
-            salesperson = Salesperson.objects.get(pk=employee_id)
+            salesperson_id = content["salesperson_id"]
+            salesperson = Salesperson.objects.get(pk=salesperson_id)
             content["salesperson"] = salesperson
 
             customer_id = content["customer_id"]
@@ -144,3 +143,18 @@ def api_sales(request):
                 {"message": "Could not create a sale"},
                 status=400,
             )
+
+
+@require_http_methods(["DELETE"])
+def api_sale(request, pk):
+    if request.method == "DELETE":
+        try:
+            sale = Sale.objects.get(id=pk)
+            sale.delete()
+            return JsonResponse(
+                sale,
+                encoder=SaleEncoder,
+                safe=False,
+            )
+        except Sale.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
