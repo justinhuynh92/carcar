@@ -94,3 +94,53 @@ def api_customers(request):
                 {"message": "Could not create a customer"},
                 status=400,
             )
+
+
+@require_http_methods(["DELETE"])
+def api_customer(request, pk):
+    if request.method == "DELETE":
+        try:
+            customer = Customer.objects.get(id=pk)
+            customer.delete()
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
+
+
+@require_http_methods(["GET", "POST"])
+def api_sales(request):
+    if request.method == "GET":
+        sales = Sale.objects.all()
+        return JsonResponse(
+            {"sales": sales},
+            encoder=SaleEncoder
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            vin = content["automobile"]
+            auto = AutomobileVO.objects.get(pk=vin)
+            content["automobile"] = auto
+
+            employee_id = content["employee_id"]
+            salesperson = Salesperson.objects.get(pk=employee_id)
+            content["salesperson"] = salesperson
+
+            customer_id = content["customer_id"]
+            customer = Customer.objects.get(pk=customer_id)
+            content["customer"] = customer
+            sale = Sale.objects.create(**content)
+            return JsonResponse(
+                sale,
+                encoder=SaleEncoder,
+                safe=False,
+            )
+        except Sale.DoesNotExist:
+            return JsonResponse(
+                {"message": "Could not create a sale"},
+                status=400,
+            )
