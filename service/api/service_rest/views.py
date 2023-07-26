@@ -29,7 +29,7 @@ class AppointmentEncoder(ModelEncoder):
         "reason",
         "vip",
         "technician",
-        "finished",
+        "status",
         "id",
     ]
     encoders = {
@@ -131,3 +131,37 @@ def show_appointment(request, id):
             encoder=AppointmentEncoder,
             safe=False,
         )
+
+@require_http_methods(["PUT"])
+def finish_appointment(request, id):
+    if request.method == "PUT":
+        try:
+            appointment = Appointment.objects.get(id=id)
+            appointment.finish()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentEncoder,
+                safe=False,
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse(
+                {"message": "Appointment does not exist"},
+                status=400,
+            )
+
+@require_http_methods(["PUT"])
+def cancel_appointment(request, id):
+    if request.method == "PUT":
+        try:
+            appointment = Appointment.objects.get(id=id)
+            appointment.cancel()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentEncoder,
+                safe=False,
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse(
+                {"message": "Appointment does not exist"},
+                status=400,
+            )
