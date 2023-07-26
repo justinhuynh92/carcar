@@ -121,16 +121,13 @@ def api_sales(request):
     else:
         try:
             content = json.loads(request.body)
-            automobile_id = content["automobile_id"]
-            automobile = AutomobileVO.objects.get(pk=automobile_id)
+            automobile = AutomobileVO.objects.get(vin=content["automobile"])
             content["automobile"] = automobile
 
-            salesperson_id = content["salesperson_id"]
-            salesperson = Salesperson.objects.get(pk=salesperson_id)
+            salesperson = Salesperson.objects.get(employee_id=content["salesperson"])
             content["salesperson"] = salesperson
 
-            customer_id = content["customer_id"]
-            customer = Customer.objects.get(pk=customer_id)
+            customer = Customer.objects.get(id=content["customer"])
             content["customer"] = customer
             sale = Sale.objects.create(**content)
             return JsonResponse(
