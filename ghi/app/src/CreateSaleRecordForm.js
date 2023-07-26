@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function SaleRecordForm({ getSales }) {
     //add more stuff...customers, salespersons & auto vin state arrays to add to form for dropdowns
+    //then invoke SaleRecordForm in router and pass it the getSales prop
     const [auto, setAuto] = useState('');
     const [salesperson, setSalesperson] = useState('');
     const [customer, setCustomer] = useState('');

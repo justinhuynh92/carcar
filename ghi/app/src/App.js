@@ -4,6 +4,7 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import CustomerForm from './CreateCustomerForm';
 import SalespersonForm from './CreateSalespersonForm';
+import CustomerList from './CustomersList';
 
 function App() {
 
@@ -86,6 +87,7 @@ function App() {
 
           <Route path="customer">
             <Route path="new" element={<CustomerForm getCustomers={getCustomers} />} />
+            <Route index element={<CustomerList customers={customers}/>} />
           </Route>
 
           <Route path="salesperson">
