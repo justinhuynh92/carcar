@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import CustomerForm from './CreateCustomerForm';
 
-function App() {
-
-
-
+function App(props) {
+  // if(props.sales === undefined) {
+  //   return null;
+  // }
 
 
   return (
@@ -16,8 +18,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
 
           <Route path="customer">
-            {/* add element={CreateCustomer} directly below */}
-            <Route path="new" />
+            <Route path="new" element={<CustomerForm />} />
           </Route>
 
           <Route path="salesperson">
@@ -27,9 +28,12 @@ function App() {
           <Route path="salerecord">
             {/* add element = component name and any props */}
             <Route path="new" />
-            {/* add component and any props */}
+            {/* add the component that lists all sales and any props */}
             <Route index  />
           </Route>
+
+          {/* add element component and any props */}
+          <Route path="saleshistory" />
 
         </Routes>
       </div>
