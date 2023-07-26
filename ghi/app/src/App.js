@@ -89,7 +89,7 @@ function App() {
           </Route>
 
           <Route path="salesperson">
-            <Route path="new" element={<SalespersonForm />} />
+            <Route path="new" element={<SalespersonForm getSalespersons={getSalespersons} />} />
           </Route>
 
           <Route path="salerecord">

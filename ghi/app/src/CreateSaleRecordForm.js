@@ -1,7 +1,56 @@
 import React, { useState, useEffect } from "react";
 
 function SaleRecordForm({ getSales }) {
+    //add more stuff...customers, salespersons & auto vin state arrays to add to form for dropdowns
+    const [auto, setAuto] = useState('');
+    const [salesperson, setSalesperson] = useState('');
+    const [customer, setCustomer] = useState('');
+    const [price, setPrice] = useState('');
 
+    const handleAutoChange = event => {
+        const value = event.target.value;
+        setAuto(value)
+    }
+    const handleSalespersonChange = event => {
+        const value = event.target.value;
+        setSalesperson(value)
+    }
+    const handleCustomerChange = event => {
+        const value = event.target.value;
+        setCustomer(value)
+    }
+    const handlePriceChange = event => {
+        const value = event.target.value;
+        setPrice(value)
+    }
+
+    const handleSubmit = async event => {
+        event.preventDefault();
+        const data = {
+            automobile: auto,
+            salesperson: salesperson,
+            customer: customer,
+            price: price
+        }
+        const salesUrl = 'http://localhost:8090/api/sales/';
+        const fetchConfig = {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+
+        const response = await fetch(salesUrl, fetchConfig)
+        if (response.ok) {
+            const newSaleRecord = await response.json();
+            console.log(newSaleRecord);
+
+            setAuto('');
+            setSalesperson('');
+
+        }
+    }
 
     return (
     <div className="row">

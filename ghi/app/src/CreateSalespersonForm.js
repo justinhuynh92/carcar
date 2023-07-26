@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SalespersonForm() {
+function SalespersonForm({ getSalespersons }) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [employeeId, setEmployeeId] = useState('');
@@ -41,6 +41,7 @@ function SalespersonForm() {
             setFirstName('');
             setLastName('');
             setEmployeeId('');
+            getSalespersons();
         }
 
     }
