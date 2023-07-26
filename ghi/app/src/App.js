@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import CustomerForm from './CreateCustomerForm';
+import SalespersonForm from './CreateSalespersonForm';
 
 function App(props) {
   // if(props.sales === undefined) {
@@ -22,7 +23,7 @@ function App(props) {
           </Route>
 
           <Route path="salesperson">
-            <Route path="new" />
+            <Route path="new" element={<SalespersonForm />} />
           </Route>
 
           <Route path="salerecord">
