@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CustomerForm() {
+function CustomerForm({ getCustomers }) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
@@ -49,6 +49,7 @@ function CustomerForm() {
             setLastName('');
             setAddress('');
             setPhoneNumber('');
+            getCustomers();
         }
     }
 
