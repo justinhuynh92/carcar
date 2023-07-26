@@ -9,6 +9,7 @@ class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         "vin",
+        "sold",
         "id",
     ]
 
@@ -35,6 +36,8 @@ class AppointmentEncoder(ModelEncoder):
     encoders = {
         "technician": TechnicianEncoder(),
     }
+    def get_extra_data(self, o):
+        return {"is_vip": o.is_vip()}
 
 @require_http_methods(["GET", "POST"])
 def list_technicians(request):
@@ -137,7 +140,27 @@ def finish_appointment(request, id):
     if request.method == "PUT":
         try:
             appointment = Appointment.objects.get(id=id)
-            appointment.finish()
+            appointment.status = Appointment.Status.Finished
+            appointment.save()
+            return JsonResponse(
+            appointment,
+            encoder=AppointmentEncoder,
+            safe=False,
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse(
+                {"message": "Appointment does not exist"},
+                status=400,
+            )
+
+
+@require_http_methods(["PUT"])
+def cancel_appointment(request, id):
+    if request.method == "PUT":
+        try:
+            appointment = Appointment.objects.get(id=id)
+            appointment.status = Appointment.Status.Cancelled
+            appointment.save()
             return JsonResponse(
                 appointment,
                 encoder=AppointmentEncoder,
@@ -149,19 +172,11 @@ def finish_appointment(request, id):
                 status=400,
             )
 
-@require_http_methods(["PUT"])
-def cancel_appointment(request, id):
-    if request.method == "PUT":
-        try:
-            appointment = Appointment.objects.get(id=id)
-            appointment.cancel()
-            return JsonResponse(
-                appointment,
-                encoder=AppointmentEncoder,
-                safe=False,
-            )
-        except Appointment.DoesNotExist:
-            return JsonResponse(
-                {"message": "Appointment does not exist"},
-                status=400,
-            )
+
+def list_appointment_statuses(request):
+    statuses = Appointment.Status.choices
+    status_list = [{'value': value, 'label': label} for value, label in statuses]
+    return JsonResponse(
+        status_list,
+        safe=False,
+    )
