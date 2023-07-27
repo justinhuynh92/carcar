@@ -11,6 +11,7 @@ import ManufacturerList from './ManufacturerList';
 import VehicleModelForm from './CreateModelForm';
 import SaleRecordForm from './CreateSaleRecordForm';
 import SalesList from './SalesList';
+import SalespersonHistory from './SalespersonHistory';
 
 function App() {
 
@@ -137,7 +138,7 @@ function App() {
           </Route>
 
           {/* add element component and any props */}
-          <Route path="saleshistory" />
+          <Route path="saleshistory" element={<SalespersonHistory sales={sales} />} />
 
         </Routes>
       </div>
