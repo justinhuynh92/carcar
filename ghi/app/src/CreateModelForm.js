@@ -25,6 +25,7 @@ function VehicleModelForm({ getManufacturers, manufacturers, getModels }) {
             picture_url: pictureUrl,
             manufacturer_id: manufacturer
         }
+        console.log(data)
         const vehicleModelUrl = 'http://localhost:8100/api/models/';
         const fetchConfig = {
             method: "POST",
@@ -63,7 +64,7 @@ function VehicleModelForm({ getManufacturers, manufacturers, getModels }) {
                            <select onChange={handleManufacturerChange} required name="manufacturer" id="manufacturer" className="form-select">
                               <option value="">Choose a manufacturer</option>
                               {manufacturers.map( (manufacturer, index) => {
-                            return <option key={index} value={manufacturer.manufacturer_id}>{manufacturer.name}</option>
+                            return <option key={index} value={manufacturer.id}>{manufacturer.name}</option>
                         })}
                            </select>
                        </div>

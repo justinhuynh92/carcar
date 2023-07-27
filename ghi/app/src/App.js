@@ -9,6 +9,8 @@ import SalespeopleList from './SalespeopleList';
 import ManufacturerForm from './CreateManufacturerForm';
 import ManufacturerList from './ManufacturerList';
 import VehicleModelForm from './CreateModelForm';
+import SaleRecordForm from './CreateSaleRecordForm';
+import SalesList from './SalesList';
 
 function App() {
 
@@ -17,12 +19,14 @@ function App() {
   const [sales, setSales] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [salespersons, setSalespersons] = useState([]);
+  const [autos, setAutos] = useState([]);
 
   async function getManufacturers() {
     const url = 'http://localhost:8100/api/manufacturers/';
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
       setManufacturers(data.manufacturers);
     } else {
       console.error('Could not fetch the data')
@@ -55,6 +59,7 @@ function App() {
     const response = await fetch(url)
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
       setCustomers(data.customers)
     } else {
       console.error('Could not fetch data')
@@ -65,9 +70,19 @@ function App() {
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
       setSalespersons(data.salespersons)
     } else {
       console.error('Could not fetch data')
+    }
+  }
+  async function getAutos() {
+    const url = 'http://localhost:8100/api/automobiles/';
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      setAutos(data.autos)
     }
   }
 
@@ -78,6 +93,7 @@ function App() {
     getSales();
     getCustomers();
     getSalespersons();
+    getAutos();
   }, [])
 
 
@@ -110,9 +126,14 @@ function App() {
 
           <Route path="salerecord">
             {/* add element = component name and any props */}
-            <Route path="new" />
+            <Route path="new" element={<SaleRecordForm getAutos={getAutos} getSalespersons={getSalespersons} getCustomers={getCustomers} autos={autos} customers={customers} salespersons={salespersons} />} />
             {/* add the component that lists all sales and any props */}
-            <Route index  />
+            <Route index element={<SalesList sales={sales}/>} />
+          </Route>
+
+          <Route path="automobiles">
+            <Route path="new" />
+            <Route index />
           </Route>
 
           {/* add element component and any props */}
