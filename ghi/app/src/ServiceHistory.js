@@ -31,7 +31,7 @@ function ServiceHistory() {
                 >
                 </input>
             </div>
-                <table className="table">
+                <table className="table table-striped">
                     <thead>
                         <tr>
                             <th>Vin</th>

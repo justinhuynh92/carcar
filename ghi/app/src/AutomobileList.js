@@ -24,7 +24,7 @@ function AutoList() {
         <p>
             <Link to="/automobiles/new" className="btn createOnList border full-rounded">Add A New Automobile</Link>
         </p>
-        <table>
+        <table className="table table-striped">
             <thead>
                 <tr>
                     <th>VIN</th>

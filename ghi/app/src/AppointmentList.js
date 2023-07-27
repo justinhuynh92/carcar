@@ -49,7 +49,7 @@ function AppointmentList() {
                 <Link to="/appointments/new" className="btn createOnList border full-rounded" >Schedule a new appointment</Link>
                 </p>
             </h2>
-            <table>
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>Vin</th>
