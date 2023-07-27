@@ -24,7 +24,7 @@ CarCar is made up of 3 microservices:
 - Service
 - Sales
 
-![IMAGE_DESCRIPTION](file:///Users/justinhuynh/Downloads/project-beta-excalidraw.jpg)
+ ![]()
 
 ## Service microservice
 The service is made up of 3 services: AutomobileVO, Technician, and Appointment.
@@ -48,15 +48,148 @@ This service is going to broken down into different API endpoints (url for web a
 
 <details><summary>GET: List of Technicians</summary>
 Returns:
+
+```
 {
     "href": "/api/technicians/5/",
     "name": "asdf",
     "employee_number": 5,
     "id": 5
 }
+```
+</details>
+<details><summary>POST: Creating a New Technician</summary>
+Returns:
 
+```
+{
+    "href": "/api/technicians/5/",
+    "name": "asdf",
+    "employee_number": 5,
+    "id": 5
+}
+```
+</details>
+<details><summary>DELETE: Deleting a Technician</summary>
+Returns:
+
+```
+{
+    "deleted": true
+}
+```
 </details>
 
+**Appointments API**
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List Appointments | GET | http://localhost:8080/api/appointments/
+| Create an Appointment | POST | http://localhost:8080/api/appointments/
+| Delete an Appointment | DELETE | http://localhost:8080/api/appointments/:id/
+| Set an Appointment to canceled | PUT | http://localhost:8080/api/appointments/:id/cancel
+| Set an Appointment to finished | PUT | http://localhost:8080/api/appointments/:id/finish
+
+<details><summary>GET: List of Appointments</summary>
+Returns:
+
+```
+{
+    "href": "/api/appointments/5/",
+    "vin": "5",
+    "customer_name": "mike",
+    "date": null,
+    "reason": "",
+    "vip": false,
+    "technician": {
+        "href": "/api/technicians/3/",
+        "name": "mike",
+        "employee_number": 3,
+        "id": 3
+    },
+    "status": "Cancelled",
+    "id": 5,
+    "is_vip": false
+}
+```
+</details>
+<details><summary>POST: Creating a New Appointment</summary>
+Returns:
+
+```
+{
+    "href": "/api/appointments/7/",
+    "vin": 7,
+    "customer_name": "asdf",
+    "date": null,
+    "reason": "",
+    "vip": false,
+    "technician": {
+        "href": "/api/technicians/3/",
+        "name": "mike",
+        "employee_number": 3,
+        "id": 3
+    },
+    "status": "Pending",
+    "id": 7,
+    "is_vip": false
+}
+```
+</details>
+<details><summary>DELETE: Deleting an Appointment</summary>
+Returns:
+
+```
+{
+    "deleted": true
+}
+```
+</details>
+<details><summary>PUT: Set Appointment Status to Canceled</summary>
+Returns:
+
+```
+{
+	"href": "/api/appointments/1/",
+	"vin": "1",
+	"customer_name": "test",
+	"date": null,
+	"reason": "",
+	"vip": false,
+	"technician": {
+		"href": "/api/technicians/1/",
+		"name": "justin",
+		"employee_number": 1,
+		"id": 1
+	},
+	"status": "Cancelled",
+	"id": 1,
+	"is_vip": false
+}
+```
+</details>
+<details><summary>PUT: Set Appointment Status to Finished</summary>
+Returns:
+
+```
+{
+	"href": "/api/appointments/1/",
+	"vin": "1",
+	"customer_name": "test",
+	"date": null,
+	"reason": "",
+	"vip": false,
+	"technician": {
+		"href": "/api/technicians/1/",
+		"name": "justin",
+		"employee_number": 1,
+		"id": 1
+	},
+	"status": "Finished",
+	"id": 1,
+	"is_vip": false
+}
+```
+</details>
 ## Sales microservice
 
 Explain your models and integration with the inventory
