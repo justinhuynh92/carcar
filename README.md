@@ -24,7 +24,14 @@ CarCar is made up of 3 microservices:
 - Service
 - Sales
 
- ![]()
+
+
+
+![IMAGE_DESCRIPTION](file:///Users/justinhuynh/Downloads/project-beta-excalidraw.jpg)
+
+
+
+
 
 ## Inventory Microservice
 This microservice is made up of 3 models: Manufacturer, VehicleModel, and Automobiles. The inventory microservice handles the data of all the vehicles being passed through the app.
