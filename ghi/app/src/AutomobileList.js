@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function AutoList() {
     const [autos, setAutos] = useState([]);
@@ -34,7 +35,7 @@ function AutoList() {
                 </tr>
             </thead>
             <tbody>
-                {autos.maps((auto, id) => {
+                {autos.map((auto, id) => {
                     return (
                         <tr key={id}>
                             <td>{auto.vin}</td>

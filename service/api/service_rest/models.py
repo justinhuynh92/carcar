@@ -45,6 +45,14 @@ class Appointment(models.Model):
             return True
         return False
 
+    def is_finished(self):
+        self.status = "Finished"
+        self.save()
+
+    def is_cancelled(self):
+        self.status = "Cancelled"
+        self.save()
+
     def __str__(self):
         return self.vin
 

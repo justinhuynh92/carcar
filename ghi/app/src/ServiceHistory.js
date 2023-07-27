@@ -1,21 +1,21 @@
 import React, {useState, useEffect} from 'react';
 
 function ServiceHistory() {
-    const [appointments, setAppointments] = useState('');
+    const [appointments, setAppointments] = useState([]);
+    const [search, setSearch] = useState('');
     const fetchAppointments = async () => {
         const response = await fetch('http://localhost:8080/api/appointments/');
         const data = await response.json();
         if (response.ok) {
-            const finishedAppointments = data.appointments.filter((appointment) => appointment.finished);
-            setAppointments(finishedAppointments);
+            setAppointments(data.appointments)
+            // const finishedAppointments = data.appointments.filter((appointment) => appointment.finished);
+            // setAppointments(finishedAppointments);
         }
     };
 
     useEffect(() => {
         fetchAppointments();
     }, []);
-
-    const [search, setSearch] = useState('');
 
     return (
         <div className="my-5 container" id="formDiv">
@@ -45,20 +45,24 @@ function ServiceHistory() {
                         </tr>
                     </thead>
                     <tbody>
-                        {appointments.filter((appointment)=> {
-                            return search === "" ? appointment : appointment.vin.includes(search)
-                        }).map((appointment, id) => {
-                        return(
-                            <tr key={id}>
-                                <td>{ appointment.vin }</td>
-                                <td>{ appointment.customer_name }</td>
-                                <td>{ new Date (appointment.date).toLocaleDateString() }</td>
-                                <td>{ new Date(appointment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }</td>
-                                <td>{ appointment.reason }</td>
-                                <td>{ appointment.technician.name }</td>
-                            </tr>
-                        );
-                    })}
+                        {appointments
+                        .filter(appointment => appointment.status !== "Pending")
+                        .filter(appointment => search === "" || appointment.vin.includes(search))
+                        .map(
+                                appointment => {
+                            return (
+                                <tr key={appointment.id}>
+                                    <td>{ appointment.vin }</td>
+                                    <td>{ appointment.is_vip ? "Yes" : "No" }</td>
+                                    <td>{ appointment.customer_name }</td>
+                                    <td>{ new Date (appointment.date).toLocaleDateString() }</td>
+                                    <td>{ new Date(appointment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }</td>
+                                    <td>{ appointment.reason }</td>
+                                    <td>{ appointment.technician.name }</td>
+                                    <td>{ appointment.status }</td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
             </div>

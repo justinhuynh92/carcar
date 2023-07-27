@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 function AppointmentList() {
-    const [appointments, setAppointments] = useState([]);
+    const [appointments, setAppointments,] = useState([]);
+    const [filterArray, setFilterArray] = useState([]);
     const fetchAppointments = async () => {
         const response = await fetch('http://localhost:8080/api/appointments/');
-        const data = await response.json();
+        console.log(response)
         if (response.ok) {
-            const finishedAppointments = data.appointments.filter((appointment) => !appointment.finished);
-            setAppointments(finishedAppointments);
+            const data = await response.json();
+            // const finishedAppointments = data.appointments.filter((appointment) => !appointment.finished);;
+            console.log(data)
+            setAppointments(data.appointments);
         }
     }
 
@@ -16,29 +19,22 @@ function AppointmentList() {
         fetchAppointments();
     }, []);
 
-    const deleteAppointment = async (event) => {
-        const appointmentUrl = `http://localhost:8080/api/appointment/${event.id}/`
-        const fetchConfig = { method: "DELETE"};
-        const response = await fetch(appointmentUrl, fetchConfig)
+    const deleteAppointment = async (id) => {
+        const cancelUrl = `http://localhost:8080/api/appointments/${id}/cancel/`
+        const fetchConfig = { method: "PUT" };
+        const response = await fetch(cancelUrl, fetchConfig);
         if (response.ok) {
-            fetchAppointments()
+            fetchAppointments();
         }
     }
 
-    const handleFinished = async (event) => {
-        const data = {}
-        data["finished"] = true
-        const finishedUrl = `http://localhost:8080/api/appointment/${event.id}/`
-        const response = await fetch(finishedUrl);
-        const fetchConfig = {
-            method: "PUT",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    const handleFinished = async (id) => {
+        const finishedUrl = `http://localhost:8080/api/appointments/${id}/finish/`
+        const fetchConfig = { method: "PUT" };
+        const response = await fetch(finishedUrl, fetchConfig);
+        if (response.ok) {
+            fetchAppointments();
         }
-        await fetch(finishedUrl, fetchConfig);
-        await fetchAppointments();
     }
 
     useEffect(() => {
@@ -63,11 +59,11 @@ function AppointmentList() {
                         <th>Time</th>
                         <th>Reason</th>
                         <th>Technician</th>
-                        <th>VIP</th>
+                        <th>Is VIP?</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map((appointment, id) => {
+                    {appointments.filter(appointment => appointment.status == "Pending").map((appointment, id) => {
                     return(
                         <tr key={id}>
                             <td>{ appointment.vin }</td>
@@ -76,9 +72,10 @@ function AppointmentList() {
                             <td>{ new Date(appointment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }</td>
                             <td>{ appointment.reason }</td>
                             <td>{ appointment.technician.name }</td>
+                            <td>{appointment.is_vip ? "Yes" : "No"}</td>
                             <td>
-                                <button className="finished__btn" onClick={() => handleFinished(appointment)}>Finished</button>
-                                <button className="canceled__btn" onClick={() => deleteAppointment(appointment)}>Cancel</button>
+                                <button className="finished__btn" onClick={() => handleFinished(appointment.id)}>Finished</button>
+                                <button className="canceled__btn" onClick={() => deleteAppointment(appointment.id)}>Cancel</button>
                             </td>
                         </tr>
                     );
