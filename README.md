@@ -2,7 +2,7 @@
 
 Team:
 
-Justin Huynh - Service
+Justin Huynh - Service  
 Jonathan Cornejo - Sales
 
 ## Getting Started
@@ -26,7 +26,226 @@ CarCar is made up of 3 microservices:
 
  ![]()
 
-## Service microservice
+## Inventory Microservice
+This microservice is made up of 3 models: Manufacturer, VehicleModel, and Automobiles. The inventory microservice handles the data of all the vehicles being passed through the app.
+
+The Manufacturer model has only one property, name, which holds the data to all manufacturer types available in the inventory.
+
+The VehicleModel model has the properties name, picture_url, and manufacturer. The manufacturer property is a foreign key which references the name of the manufacturer from the Manufacturer model. The name takes the input of a name and picture_url takes the input of a picture url.
+
+The Automobile model has the properties color, vin, year, and model. The other 2 microservices uses a poller to pull data from this model. The model property is a foreign key that refers to the VehicleModel for the name. The color takes the input of a color of the vehicle, the year takes the input of the year of the vehicle, and vin takes the vin number of the vehicle.
+
+**Manufactuerer API**
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List of Manufacturers | GET | http://localhost:8100/api/manufacturers/
+| Create a Manufacturer | POST | http://localhost:8100/api/manufacturers/
+| Details of a Manufacturer | GET | http://localhost:8100/api/manufacturers/:id
+| Update a Manufacturer | PUT | http://localhost:8100/api/manufacturers/:id/
+| Delete a Manufacturer | DELETE | http://localhost:8100/api/manufacturers/:id/
+
+<details><summary>GET: List of Manufacturers</summary>
+Returns:
+
+```
+{
+  "manufacturers": [
+    {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  ]
+} 
+```
+</details>
+<details><summary>POST: Create a Manufacturer</summary>
+Returns:
+
+```
+{
+  "href": "/api/manufacturers/1/",
+  "id": 1,
+  "name": "Chrysler"
+}  
+```
+</details>
+<details><summary>GET: Details of a Manufacturer</summary>
+Returns:
+
+```
+{
+  "href": "/api/manufacturers/1/",
+  "id": 1,
+  "name": "Chrysler"
+}  
+```
+</details>
+<details><summary>PUT: Update a Manufacturer</summary>
+Returns:
+
+```
+{
+  "href": "/api/manufacturers/1/",
+  "id": 1,
+  "name": "Chrysler"
+}  
+```
+</details>
+
+**VehicleModels API**
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List of Vehicle Models | GET | http://localhost:8100/api/models/
+| Create a Vehicle Model | POST | http://localhost:8100/api/models/
+| Details of a Vehicle Model | GET | http://localhost:8100/api/models/:id
+| Update a Vehicle Model | PUT | http://localhost:8100/api/models/:id/
+| Delete a Vehicle Model | DELETE | http://localhost:8100/api/models/:id/
+
+<details><summary>GET: List of Vehicle Models</summary>
+Returns:
+
+```
+{
+  "href": "/api/models/1/",
+  "id": 1,
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+  "manufacturer": {
+    "href": "/api/manufacturers/1/",
+    "id": 1,
+    "name": "Daimler-Chrysler"
+  }
+} 
+```
+</details>
+<details><summary>POST: Create a Vehicle Model</summary>
+Returns:
+
+```
+{
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+  "manufacturer_id": 1
+} 
+```
+</details>
+<details><summary>GET: Details of a Vehicle Model</summary>
+Returns:
+
+```
+{
+  "href": "/api/models/1/",
+  "id": 1,
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+  "manufacturer": {
+    "href": "/api/manufacturers/1/",
+    "id": 1,
+    "name": "Daimler-Chrysler"
+  }
+} 
+```
+</details>
+<details><summary>PUT: Update a Vehicle Model</summary>
+Returns:
+
+```
+{
+    "name": "Sebring",
+    "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg"
+} 
+```
+</details>
+
+**Automobiles API**
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List of Automobiles | GET | http://localhost:8100/api/automobiles/
+| Create an Automobile | POST | http://localhost:8100/api/automobiles/
+| Details of an Automobile | GET | http://localhost:8100/api/automobiles/:vin/
+| Update an Automobile | PUT | http://localhost:8100/api/automobiles/:vin/
+| Delete an Automobile | DELETE | http://localhost:8100/api/automobiles/:vin/
+
+<details><summary>GET: List of Automobiles</summary>
+Returns:
+
+```
+{
+  "autos": [
+    {
+      "href": "/api/automobiles/1C3CC5FB2AN120174/",
+      "id": 1,
+      "color": "yellow",
+      "year": 2013,
+      "vin": "1C3CC5FB2AN120174",
+      "model": {
+        "href": "/api/models/1/",
+        "id": 1,
+        "name": "Sebring",
+        "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+        "manufacturer": {
+          "href": "/api/manufacturers/1/",
+          "id": 1,
+          "name": "Daimler-Chrysler"
+        }
+      },
+      "sold": false
+    }
+  ]
+} 
+```
+</details>
+<details><summary>POST: Create an Automobile</summary>
+Returns:
+
+```
+{
+  "color": "red",
+  "year": 2012,
+  "vin": "1C3CC5FB2AN120174",
+  "model_id": 1
+} 
+```
+</details>
+<details><summary>GET: Details of an Automobile</summary>
+Returns:
+
+```
+{
+  "href": "/api/automobiles/1C3CC5FB2AN120174/",
+  "id": 1,
+  "color": "yellow",
+  "year": 2013,
+  "vin": "1C3CC5FB2AN120174",
+  "model": {
+    "href": "/api/models/1/",
+    "id": 1,
+    "name": "Sebring",
+    "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+    "manufacturer": {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  },
+  "sold": false
+} 
+```
+</details>
+<details><summary>PUT: Update an Automobile</summary>
+Returns:
+
+```
+{
+  "color": "red",
+  "year": 2012,
+  "sold": true
+} 
+```
+</details>
+
+## Service Microservice
 The service is made up of 3 services: AutomobileVO, Technician, and Appointment.
 
 The AutomobileVO model has these properties: vin, sold, and import_href. This model represents the Automobile model in the inventory microservice, which polls the data to update or create the value object to use.
