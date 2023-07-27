@@ -5,6 +5,7 @@ import Nav from './Nav';
 import CustomerForm from './CreateCustomerForm';
 import SalespersonForm from './CreateSalespersonForm';
 import CustomerList from './CustomersList';
+import SalespeopleList from './SalespeopleList';
 
 function App() {
 
@@ -92,6 +93,7 @@ function App() {
 
           <Route path="salesperson">
             <Route path="new" element={<SalespersonForm getSalespersons={getSalespersons} />} />
+            <Route index element={<SalespeopleList salespersons={salespersons}/>}/>
           </Route>
 
           <Route path="salerecord">
