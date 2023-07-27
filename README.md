@@ -24,7 +24,7 @@ CarCar is made up of 3 microservices:
 - Service
 - Sales
 
-![IMAGE_DESCRIPTION]()
+![IMAGE_DESCRIPTION](file:///Users/justinhuynh/Downloads/project-beta-excalidraw.jpg)
 
 ## Service microservice
 The service is made up of 3 services: AutomobileVO, Technician, and Appointment.
