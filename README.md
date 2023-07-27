@@ -37,7 +37,7 @@ The VehicleModel model has the properties name, picture_url, and manufacturer. T
 
 The Automobile model has the properties color, vin, year, and model. The other 2 microservices uses a poller to pull data from this model. The model property is a foreign key that refers to the VehicleModel for the name. The color takes the input of a color of the vehicle, the year takes the input of the year of the vehicle, and vin takes the vin number of the vehicle.
 
-**Manufactuerer API**
+**Manufacturer API**
 | Action | Method | URL
 | ----------- | ----------- | ----------- |
 | List of Manufacturers | GET | http://localhost:8100/api/manufacturers/
