@@ -411,7 +411,113 @@ Returns:
 }
 ```
 </details>
+
 ## Sales microservice
 
 Explain your models and integration with the inventory
 microservice, here.
+
+**Salespeople API**
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List Salespeople | GET | http://localhost:8090/api/salespeople/
+| Create a Salesperson | POST | http://localhost:8090/api/salespeople/
+| Delete a Salesperson | DELETE | http://localhost:8090/api/salespeople/:id/
+
+<details><summary>GET: List of Salespeople</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+<details><summary>POST: Create a Salesperson</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+<details><summary>DELETE: Delete a Salesperson</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+
+**Customers API**
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List Customers | GET | http://localhost:8090/api/customers/
+| Create a Customer | POST | http://localhost:8090/api/customers/
+| Delete a Customer | DELETE | http://localhost:8090/api/customers/:id/
+
+<details><summary>GET: List of Customers</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+<details><summary>POST: Create a Customer</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+<details><summary>DELETE: Delete a Customer</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+
+**Sales API**
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List Sales | GET | http://localhost:8090/api/sales/
+| Create a Sale | POST | http://localhost:8090/api/sales/
+| Delete a Sale | DELETE | http://localhost:8090/api/sales/:id/
+
+<details><summary>GET: List of Sales</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+<details><summary>POST: Create a Sale</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
+<details><summary>DELETE: Delete a Sale</summary>
+Returns:
+
+```
+{
+
+}
+```
+</details>
