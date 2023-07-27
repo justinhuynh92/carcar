@@ -6,6 +6,7 @@ import CustomerForm from './CreateCustomerForm';
 import SalespersonForm from './CreateSalespersonForm';
 import CustomerList from './CustomersList';
 import SalespeopleList from './SalespeopleList';
+import ManufacturerForm from './CreateManufacturerForm';
 
 function App() {
 
@@ -94,6 +95,10 @@ function App() {
           <Route path="salesperson">
             <Route path="new" element={<SalespersonForm getSalespersons={getSalespersons} />} />
             <Route index element={<SalespeopleList salespersons={salespersons}/>}/>
+          </Route>
+
+          <Route path="manufacturer">
+            <Route path="new" element={<ManufacturerForm getManufacturers={getManufacturers}/>} />
           </Route>
 
           <Route path="salerecord">
