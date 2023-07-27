@@ -9,7 +9,6 @@ function AppointmentList() {
         console.log(response)
         if (response.ok) {
             const data = await response.json();
-            // const finishedAppointments = data.appointments.filter((appointment) => !appointment.finished);;
             console.log(data)
             setAppointments(data.appointments);
         }

@@ -8,8 +8,6 @@ function ServiceHistory() {
         const data = await response.json();
         if (response.ok) {
             setAppointments(data.appointments)
-            // const finishedAppointments = data.appointments.filter((appointment) => appointment.finished);
-            // setAppointments(finishedAppointments);
         }
     };
 
