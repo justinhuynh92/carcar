@@ -32,6 +32,7 @@ function AutoList() {
                     <th>Year</th>
                     <th>Model</th>
                     <th>Manufacturer</th>
+                    <th>Sold</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +44,7 @@ function AutoList() {
                             <td>{auto.year}</td>
                             <td>{auto.model.name}</td>
                             <td>{auto.model.manufacturer.name}</td>
+                            <td>{auto.sold ? "Yes" : "No"}</td>
                         </tr>
                     );
                 })}
