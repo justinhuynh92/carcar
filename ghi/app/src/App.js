@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import { useState, useEffect } from 'react';
 import CustomerForm from './CreateCustomerForm';
 import SalespersonForm from './CreateSalespersonForm';
 import CustomerList from './CustomersList';
