@@ -427,7 +427,10 @@ Returns:
 
 ```
 {
-
+  "first_name": "den",
+  "last_name": "lopez",
+  "employee_id": "3",
+  "id": 1
 }
 ```
 </details>
@@ -436,7 +439,10 @@ Returns:
 
 ```
 {
-
+    "first_name": "Lewis",
+    "last_name": "May",
+    "employee_id": "5",
+    "id": 3
 }
 ```
 </details>
@@ -445,7 +451,7 @@ Returns:
 
 ```
 {
-
+  "message": "Does not exist"
 }
 ```
 </details>
@@ -462,7 +468,11 @@ Returns:
 
 ```
 {
-
+  "first_name": "Jin",
+  "last_name": "Smith",
+  "address": "5099 Mouse Dr. Milpitas, CA",
+  "phone_number": "(610)432-3499",
+  "id": 3
 }
 ```
 </details>
@@ -471,7 +481,11 @@ Returns:
 
 ```
 {
-
+  "first_name": "Luis",
+  "last_name": "Kling",
+  "address": "2099 Steam Dr. Milpitas, CA",
+  "phone_number": "(290)431-3359",
+  "id": 5
 }
 ```
 </details>
@@ -480,7 +494,7 @@ Returns:
 
 ```
 {
-
+  "message": "Does not exist"
 }
 ```
 </details>
@@ -497,7 +511,26 @@ Returns:
 
 ```
 {
-
+  "automobile": {
+      "vin": "ERUC297CJ29983882",
+      "sold": true,
+      "id": 1
+  },
+  "salesperson": {
+      "first_name": "den",
+      "last_name": "lopez",
+      "employee_id": "3",
+      "id": 1
+  },
+  "customer": {
+      "first_name": "Jin",
+      "last_name": "Smith",
+      "address": "5099 Mouse Dr. Milpitas, CA",
+      "phone_number": "(610)432-3499",
+      "id": 3
+  },
+  "price": 14000,
+  "id": 4
 }
 ```
 </details>
@@ -506,7 +539,26 @@ Returns:
 
 ```
 {
-
+  "automobile": {
+      "vin": "ERUC297CJ29983882",
+      "sold": true,
+      "id": 1
+  },
+  "salesperson": {
+      "first_name": "den",
+      "last_name": "lopez",
+      "employee_id": "3",
+      "id": 1
+  },
+  "customer": {
+      "first_name": "Jin",
+      "last_name": "Smith",
+      "address": "5099 Mouse Dr. Milpitas, CA",
+      "phone_number": "(610)432-3499",
+      "id": 3
+  },
+  "price": 14000,
+  "id": 4
 }
 ```
 </details>
@@ -515,7 +567,7 @@ Returns:
 
 ```
 {
-
+  "message": "Does not exist"
 }
 ```
 </details>
