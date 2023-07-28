@@ -412,8 +412,9 @@ Returns:
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+In the sales microservice, I created 4 models which include AutomobileVO, Customer, Salesperson, and Sales record. These models were necessary so that they interact with our other microservices in our application. For example, the AutomobileVO was required so that my poller function can fetch data from the inventory microservice and create a copy of the Automobile essentially. The sales record encapsulates all the other three components in my sales microservices and interacts with them so I accounted for this in my api_sales views. A sales record was created by having the salesperson, customer, and automobileVO. I added encoders accordingly in order to add those to my views and send a json response to the server. 
+
+The front end then fetches this data through a fetch request at specific endpoints in our application in order to pass down state to our other components in React. Additionally, the manufacturer had to be first created in our back end so that we can create a vehicle model and finally an automobile in our inventory microservice. This information was then displayed in our front end through the usage of forms and displaying the information in lists or tables while updating the state and passing down props from parent component to child components.
 
 **Salespeople API**
 | Action | Method | URL
